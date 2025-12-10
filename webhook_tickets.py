@@ -40,7 +40,8 @@ async def on_startup(bot: Bot) -> None:
 async def on_shutdown(bot: Bot) -> None:
     """Удаление webhook при остановке"""
     await bot.delete_webhook()
-    logger.info("Webhook удален")
+    await bot.session.close()
+    logger.info("Webhook удален, сессия закрыта")
 
 
 def create_app() -> web.Application:
